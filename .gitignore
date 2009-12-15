@@ -1,0 +1,6 @@
+bin/*
+lib/*
+include/*
+src/*
+lib64
+pip-log.txt
