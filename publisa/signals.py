@@ -15,7 +15,8 @@ def post_save_handler(sender, instance, created, **kwargs):
 
     # Status is finished, and there is no publish item. So add...
     if instance.status == 2 and not p:
-        Publish.objects.create(content_object=instance)
+        Publish.objects.create(content_object=instance,
+                               banner=instance.allow_banners)
 
     # Status is unfinished, yet still it's managed by Publisa. Remove it.
     elif instance.status != 2 and p:

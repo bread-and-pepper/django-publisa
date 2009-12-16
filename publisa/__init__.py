@@ -7,7 +7,7 @@ class AlreadyRegistered(Exception):
     pass
 
 registry = []
-def register(model, banner=True):
+def register(model, allow_banners=True):
     """ Setup a model to be managed by Publisa. """
 
     if model in registry:
@@ -15,7 +15,7 @@ def register(model, banner=True):
     registry.append(model)
 
     # Set the extra attributes
-    setattr(model, 'banner', banner)
+    setattr(model, 'allow_banners', allow_banners)
     setattr(model, 'publish', PublishDescriptor())
 
     # If the model has no status, always see it as finished

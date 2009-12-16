@@ -50,12 +50,9 @@ class Publish(models.Model):
                                    default=datetime.datetime.now,
                                    help_text=_('The date of release.'))
     banner = models.BooleanField(_('banner'),
-                                 default=True,
-                                 help_text=_('Should this item be shown in the banner?'))
-    approved = models.BooleanField(_('approved'),
-                                   default=False,
-                                   editable=False,
-                                   help_text=_('Approved by the boss.'))
+                                 default=True)
+    approved = models.BooleanField(_('approve'),
+                                   default=False)
     objects = PublishManager()
 
     content_type = models.ForeignKey(ContentType, editable=False, verbose_name=_('content type'))
@@ -73,7 +70,7 @@ class Publish(models.Model):
 
     def child(self):
         """ Returns the child instance """
-        return self.type.get_object_for_this_type(id=self.id)
+        return self.content_type.get_object_for_this_type(id=self.id)
 
     @models.permalink
     def get_absolute_url(self):
@@ -92,11 +89,14 @@ class Publish(models.Model):
 
     def published_humanised(self):
         """ Show humanised string of the publication date """
-        now = datetime.datetime.now()
-        if now > self.publish:
-            return _('%s ago..') % timesince(self.publish)
+        if self.approved:
+            now = datetime.datetime.now()
+            if now > self.publish:
+                return _('%s ago..') % timesince(self.publish)
+            else:
+                return _('%s left..') % timeuntil(self.publish)
         else:
-            return _('%s left..') % timeuntil(self.publish)
+            return _('Still needs approval..')
     published_humanised.short_description = _('Publication')
     published_humanised.allow_tags = True
 
