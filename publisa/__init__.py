@@ -6,7 +6,7 @@ registry = []
 def register(model, allow_banners=True):
     """ Setup a model to be managed by Publisa. """
 
-    if model not registry:
+    if model not in registry:
         # Set the extra attributes
         setattr(model, 'allow_banners', allow_banners)
         setattr(model, 'publish', PublishDescriptor())

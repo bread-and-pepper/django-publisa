@@ -5,3 +5,4 @@ src/*
 lib64
 pip-log.txt
 *.pyc
+publisa.egg-info/
