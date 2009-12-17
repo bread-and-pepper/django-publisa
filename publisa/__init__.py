@@ -1,3 +1,5 @@
+from django.utils.translation import ugettext as _
+
 from publisa.models import PublishDescriptor
 
 class AlreadyRegistered(Exception):
