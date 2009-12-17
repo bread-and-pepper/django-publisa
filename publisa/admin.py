@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.utils.translation import ugettext as _
 
 from publisa.models import Publish
-from publisa.forms import PublishAdminForm
 
 class PublishAdmin(admin.ModelAdmin):
     list_display = ('content_type', 'content_object', 'published_humanised', 'banner')
