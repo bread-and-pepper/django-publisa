@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans 'Articles' %}{% endblock %}
+{% block content_title %}
+<h1>Articles (<a href="{% url article-list %}">view all</a>)</h1>
+{% endblock %}

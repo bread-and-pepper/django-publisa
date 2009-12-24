@@ -1,0 +1,14 @@
+{% extends 'publisa/base.html' %}
+{% block content_title %}
+Listing all items that are published.
+{% endblock %}
+
+{% block content %}
+<ul>
+{% for p in publish_list %}
+<a href="{{ p.get_absolute_url }}">{{ p }}</a>
+{% endfor %}
+</ul>
+{% if is_paginated %}{% load paginator %}{% paginator 3 %}{% endif %}
+{% endblock %}
+
