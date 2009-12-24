@@ -12,6 +12,11 @@ STATUS_CHOICES = (
 )
 class PublishManager(models.Manager):
     """ Handle the publishing of items """
+    def get_query_set(self):
+        ctype = ContentType.objects.get_for_model(self.model)
+        return Publish.objects.filter(
+            items__content_type__pk=ctype.pk)
+
     def published(self):
         return self.get_query_set().filter(approved=True,
                                            publish__lte=datetime.datetime.now())
@@ -27,9 +32,8 @@ class PublishManager(models.Manager):
 
 class PublishDescriptor(object):
     """
-    A descriptor which provides access to a ``PublishManager`` for
-    model classes and simple retrieval, updating and deletion of tags
-    for model instances.
+    A descriptor which provides access to a ``PublishManager`` for model
+    classes and simple retrieval, updating and deletion of published items.
 
     """
     def __get__(self, instance, model):
@@ -70,7 +74,7 @@ class Publish(models.Model):
 
     def child(self):
         """ Returns the child instance """
-        return self.content_type.get_object_for_this_type(id=self.id)
+        return self.content_type.get_object_for_this_type(id=self.object_id)
 
     @models.permalink
     def get_absolute_url(self):
