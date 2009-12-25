@@ -12,11 +12,6 @@ STATUS_CHOICES = (
 )
 class PublishManager(models.Manager):
     """ Handle the publishing of items """
-    def get_query_set(self):
-        ctype = ContentType.objects.get_for_model(self.model)
-        return Publish.objects.filter(
-            items__content_type__pk=ctype.pk)
-
     def published(self):
         return self.get_query_set().filter(approved=True,
                                            publish__lte=datetime.datetime.now())
@@ -32,15 +27,15 @@ class PublishManager(models.Manager):
 
 class PublishDescriptor(object):
     """
-    A descriptor which provides access to a ``PublishManager`` for model
-    classes and simple retrieval, updating and deletion of published items.
+    A descriptor which returns all the published objects from the same model,
+    or when an instance is given returns the Publish object.
 
     """
     def __get__(self, instance, model):
         if not instance:
-            publish_manager = PublishManager()
-            publish_manager.model = model
-            return publish_manager
+            ctype = ContentType.objects.get_for_model(model)
+            all_p = Publish.objects.published().filter(content_type__pk=ctype.pk)
+            return model.objects.filter(pk__in=[p.object_id for p in all_p])
         else:
             return Publish.objects.get_for_object(instance)
 
@@ -72,10 +67,6 @@ class Publish(models.Model):
     def __unicode__(self):
         return '%(title)s' % {'title': self.content_object}
 
-    def child(self):
-        """ Returns the child instance """
-        return self.content_type.get_object_for_this_type(id=self.object_id)
-
     @models.permalink
     def get_absolute_url(self):
         """
@@ -83,13 +74,7 @@ class Publish(models.Model):
         to the permalink of the child model.
 
         """
-        return self.child.get_absolute_url()
-
-    def save(self, force_insert=False, force_update=False):
-        """ Custom save method so the child of the published item can be found """
-        if not hasattr(self, 'type_ptr'):
-            self.type = ContentType.objects.get_for_model(self.__class__)
-        super(Publish, self).save(force_insert, force_update)
+        return self.content_object.get_absolute_url()
 
     def published_humanised(self):
         """ Show humanised string of the publication date """

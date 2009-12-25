@@ -8,7 +8,7 @@ class PublishAdmin(admin.ModelAdmin):
     list_filter = ('publish', 'banner')
 
     def get_form(self, request, obj=None, **kwargs):
-        if obj and not obj.child().allow_banners:
+        if obj and not obj.content_object.allow_banners:
             self.exclude = ('banner',)
         return super(PublishAdmin, self).get_form(request, obj=None, **kwargs)
 
