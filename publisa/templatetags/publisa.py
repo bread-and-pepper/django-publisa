@@ -52,7 +52,6 @@ class RenderBanners(template.Node):
             banner_context = template.Context({'object': p.content_object,})
             banner_list.append(mark_safe(t.render(banner_context)))
         context[self.var_name] = banner_list
-        print banner_list
         return ''
 
 @register.tag

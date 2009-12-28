@@ -16,5 +16,5 @@ Listing all items that are published.
     {% render_published p %}
 {% endfor %}
 </ul>
-{% if is_paginated %}{% load paginator %}{% render_pagination 3 %}{% endif %}
+{% if is_paginated %}{% load paginator %}{% render_pagination 3 'publisa/pagination.html' %}{% endif %}
 {% endblock %}
