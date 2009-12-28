@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.timesince import timeuntil, timesince
+from django.db.models.signals import post_save
 
 import datetime
 
@@ -67,7 +68,6 @@ class Publish(models.Model):
     def __unicode__(self):
         return '%(title)s' % {'title': self.content_object}
 
-    @models.permalink
     def get_absolute_url(self):
         """
         The published item doesn't have it's own permalink. It just redirect
@@ -102,3 +102,11 @@ class Status(models.Model):
 
     class Meta:
         abstract = True
+
+def post_save_published_at(sender, instance, created, **kwargs):
+    """ If the published item has a ``published_at`` field, update it """
+    if instance.approved and hasattr(instance.content_object, 'published_at'):
+        instance.content_object.published_at = instance.publish
+        instance.content_object.save()
+
+post_save.connect(post_save_published_at, sender=Publish)
