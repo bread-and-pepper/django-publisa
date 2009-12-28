@@ -5,10 +5,16 @@ Listing all items that are published.
 {% endblock %}
 
 {% block content %}
+{% render_banners 5 as banner_list %}
+{% for banner in banner_list %}
+    <li>{{ banner }}</li>
+{% endfor %}
+
+
 <ul>
 {% for p in publish_list %}
     {% render_published p %}
 {% endfor %}
 </ul>
-{% if is_paginated %}{% load paginator %}{% paginator 3 %}{% endif %}
+{% if is_paginated %}{% load paginator %}{% render_pagination 3 %}{% endif %}
 {% endblock %}

@@ -2,6 +2,12 @@ from django import template
 
 register = template.Library()
 
+def render_pagination(parser, token):
+    try:
+        tag_name, adjacent_pages = token.split_contents()
+    except ValueError:
+        pass
+
 def paginator(context, adjacent_pages=2):
     """
     To be used in conjunction with the object_list generic view.

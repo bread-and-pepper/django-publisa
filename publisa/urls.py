@@ -1,7 +1,10 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('publisa.views',
-   url('^$',
+    url(r'^page/(?P<page>\w)/$',
+        view='index',
+        name='publish-index-paginated'),
+    url('^$',
        name='publisa-index',
        view='index',)
 )

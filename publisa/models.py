@@ -4,6 +4,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.timesince import timeuntil, timesince
 from django.db.models.signals import post_save
+from django.db.models.query import QuerySet
+from django.contrib.contenttypes.generic import GenericForeignKey
 
 import datetime
 
