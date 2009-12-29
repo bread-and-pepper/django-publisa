@@ -3,12 +3,18 @@ from django.utils.translation import ugettext as _
 from publisa.models import PublishDescriptor
 
 registry = []
-def register(model, allow_banners=True):
-    """ Setup a model to be managed by Publisa. """
+def register(model, allow_banners=False, admin_preview=False):
+    """
+    Setup a model to be managed by Publisa.
 
+    """
     if model not in registry:
+        print "SETTING ADMIN %s for %s" % (admin_preview, model)
+        print "SETTING BANNERS %s for %s" % (allow_banners, model)
+
         # Set the extra attributes
         setattr(model, 'allow_banners', allow_banners)
+        setattr(model, 'admin_preview', admin_preview)
         setattr(model, 'publish', PublishDescriptor())
 
         # If the model has no status, always see it as finished

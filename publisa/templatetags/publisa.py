@@ -68,11 +68,29 @@ def render_published(parser, token):
     except ValueError:
         raise template.TemplateSyntaxError, '%s requires arguments' % token.contents.split()[0]
 
-    return RenderPublished(obj)
+    return RenderTemplates(obj, 'publish_list')
 
-class RenderPublished(template.Node):
-    def __init__(self, object):
+@register.tag
+def render_admin_preview(parser, token):
+    """
+    Displays the published item as a preview in the admin
+
+    Usage::
+        {% render_admin_preview object %}
+
+    """
+    try:
+        tag_name, obj = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError, '%s requires arguments' % token.contents.split()[0]
+
+    return RenderTemplates(obj, 'publish_admin')
+
+class RenderTemplates(template.Node):
+    """ Renders the supplied objects """
+    def __init__(self, object, template_prefix):
         self.object = template.Variable(object)
+        self.template_prefix = template_prefix
 
     def render(self, context):
         try:
@@ -82,12 +100,13 @@ class RenderPublished(template.Node):
         else:
             if hasattr(obj, 'publish'):
                 d = {'app': obj.content_type.app_label,
-                     'model': obj.content_type.name}
+                     'model': obj.content_type.name,
+                     'prefix': self.template_prefix}
 
                 templates = [
-                    '%(app)s/%(model)s_publish_list.html' % d,
-                    'publisa/%(model)s_publish_list.html' % d,
-                    'publisa/item_publish_list.html',]
+                    '%(app)s/%(model)s_%(prefix)s.html' % d,
+                    'publisa/%(model)s_%(prefix)s.html' % d,
+                    'publisa/item_%(prefix)s.html' % d,]
 
                 t = template.loader.select_template(templates)
                 context = template.Context({'object': obj.content_object,})
@@ -95,7 +114,5 @@ class RenderPublished(template.Node):
                     rendered = t.render(context)
                 except template.TemplateSyntaxError:
                     return ''
-                else: return rendered
+                else: return mark_safe(rendered)
             else: return ''
-
-
