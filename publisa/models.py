@@ -78,6 +78,20 @@ class Publish(models.Model):
         """
         return self.content_object.get_absolute_url()
 
+    def get_previous_published(self):
+        """ Returns the previously published item or None if there's none. """
+        prev_pub = self.get_previous_by_publish(approved=True)
+        if prev_pub:
+            return prev_pub.content_object
+        else: return None
+
+    def get_next_published(self):
+        """ Returns the next published item or None if there's none. """
+        next_pub = self.get_next_by_publish(approved=True)
+        if next_pub:
+            return next_pub.content_object
+        else: return None
+
     def published_humanised(self):
         """ Show humanised string of the publication date """
         if self.approved:
