@@ -9,9 +9,6 @@ def register(model, allow_banners=False, admin_preview=False):
 
     """
     if model not in registry:
-        print "SETTING ADMIN %s for %s" % (admin_preview, model)
-        print "SETTING BANNERS %s for %s" % (allow_banners, model)
-
         # Set the extra attributes
         setattr(model, 'allow_banners', allow_banners)
         setattr(model, 'admin_preview', admin_preview)

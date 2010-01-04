@@ -13,6 +13,7 @@ STATUS_CHOICES = (
         (1, _('Draft')),
         (2, _('Finished')),
 )
+
 class PublishManager(models.Manager):
     """ Handle the publishing of items """
     def published(self):
@@ -51,11 +52,16 @@ class Publish(models.Model):
     publish = models.DateTimeField(_('publish'),
                                    default=datetime.datetime.now,
                                    help_text=_('The date of release.'))
-    banner = models.BooleanField(_('banner'),
-                                 default=True)
     approved = models.BooleanField(_('approve'),
                                    default=False)
     objects = PublishManager()
+    banner = models.BooleanField(_('banner'),
+                                 default=True,
+                                 help_text=_('Should this item be published in the banner rotation?'))
+    banner_image = models.ImageField(_('banner image'),
+                                     upload_to='banners',
+                                     blank=True,
+                                     help_text=_('If left empty, the first photo in the article will be used.'))
 
     content_type = models.ForeignKey(ContentType, editable=False, verbose_name=_('content type'))
     object_id = models.PositiveIntegerField(editable=False)
@@ -91,6 +97,24 @@ class Publish(models.Model):
         if next_pub:
             return next_pub.content_object
         else: return None
+
+    def get_banner_image(self):
+        """
+        Returns an Django Image type containing the image for the banner.
+
+        If the ``banner_image`` is empty, it will search for a ``publish_banner_image``
+        inside the published item model. This method should return a Django Image.
+
+        """
+        if self.banner_image:
+            return self.banner_image
+        else:
+            try:
+                hasattr(self.content_object, 'publish_banner_image')
+            except AttributeError:
+                return None
+            else:
+                return self.content_object.publish_banner_image
 
     def published_humanised(self):
         """ Show humanised string of the publication date """

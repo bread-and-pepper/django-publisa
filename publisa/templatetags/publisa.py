@@ -109,7 +109,8 @@ class RenderTemplates(template.Node):
                     'publisa/item_%(prefix)s.html' % d,]
 
                 t = template.loader.select_template(templates)
-                context = template.Context({'object': obj.content_object,})
+                context = template.Context({'publish': obj,
+                                            'object': obj.content_object,})
                 try:
                     rendered = t.render(context)
                 except template.TemplateSyntaxError:

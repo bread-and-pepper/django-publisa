@@ -1,8 +1,9 @@
 {% extends 'admin/change_form.html' %}
 {% load i18n publisa %}
-{% block content %}
+{% block after_related_objects %}
 {% if item %}
-<div id="content" class="coIM" style="border:1px solid #d4d4d4; padding: 10px; width: 520px; margin: 15px auto;">
+<h3>{% trans 'Preview' %}</h3>
+<div id="content" class="coIM" style="border:1px solid #d4d4d4; padding: 10px; margin: 15px auto; ">
     {% render_admin_preview item %}
 </div>
 {% endif %}
