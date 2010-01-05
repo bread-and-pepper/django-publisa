@@ -12,7 +12,6 @@ class PublishAdmin(admin.ModelAdmin):
         publish = Publish.objects.get(pk=object_id)
         # If the item has ``admin_preview`` enabled. Supply the view with the
         # published item
-        print publish.content_object.admin_preview
         if publish.content_object.admin_preview:
             my_context = {'item': publish}
         else: my_context = None
@@ -23,7 +22,7 @@ class PublishAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         if obj and not obj.content_object.allow_banners:
-            self.exclude = ('banner',)
+            self.exclude = ('banner', 'banner_image')
         return super(PublishAdmin, self).get_form(request, obj=None, **kwargs)
 
 admin.site.register(Publish, PublishAdmin)

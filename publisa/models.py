@@ -106,15 +106,17 @@ class Publish(models.Model):
         inside the published item model. This method should return a Django Image.
 
         """
-        if self.banner_image:
-            return self.banner_image
+        if not self.content_object.allow_banners:
+            return None
         else:
-            try:
-                hasattr(self.content_object, 'publish_banner_image')
-            except AttributeError:
-                return None
+            if self.banner_image: return self.banner_image
             else:
-                return self.content_object.publish_banner_image
+                try:
+                    hasattr(self.content_object, 'publish_banner_image')
+                except AttributeError:
+                    return None
+                else:
+                    return self.content_object.publish_banner_image
 
     def published_humanised(self):
         """ Show humanised string of the publication date """

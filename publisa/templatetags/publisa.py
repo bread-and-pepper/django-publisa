@@ -49,7 +49,8 @@ class RenderBanners(template.Node):
                 'publisa/%(model)s_publish_banner.html' % d,
                 'publisa/item_publish_banner.html',]
             t = template.loader.select_template(templates)
-            banner_context = template.Context({'object': p.content_object,})
+            banner_context = template.Context({'object': p.content_object,
+                                               'publish': p})
             banner_list.append(mark_safe(t.render(banner_context)))
         context[self.var_name] = banner_list
         return ''
