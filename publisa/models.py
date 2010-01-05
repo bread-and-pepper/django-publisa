@@ -6,6 +6,7 @@ from django.utils.timesince import timeuntil, timesince
 from django.db.models.signals import post_save
 from django.db.models.query import QuerySet
 from django.contrib.contenttypes.generic import GenericForeignKey
+from django.db.models import F
 
 import datetime
 
