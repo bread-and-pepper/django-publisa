@@ -112,12 +112,9 @@ class Publish(models.Model):
         else:
             if self.banner_image: return self.banner_image
             else:
-                try:
-                    hasattr(self.content_object, 'publish_banner_image')
-                except AttributeError:
-                    return None
-                else:
+                if hasattr(self.content_object, 'publish_banner_image'):
                     return self.content_object.publish_banner_image
+                else: return None
 
     def published_humanised(self):
         """ Show humanised string of the publication date """
