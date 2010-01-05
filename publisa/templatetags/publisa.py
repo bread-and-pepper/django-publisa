@@ -38,20 +38,22 @@ class RenderBanners(template.Node):
 
     def render(self, context):
         # get latest x amount of published items
-        publish_list = Publish.objects.published().select_related('content_type')[:self.total]
+        publish_list = Publish.objects.published().filter(banner=True).select_related('content_type')[:self.total]
         banner_list = []
         for p in publish_list:
-            d = {'app': p.content_type.app_label,
-                 'model': p.content_type.name}
+            # Only add banners which have an image
+            if p.get_banner_image():
+                d = {'app': p.content_type.app_label,
+                     'model': p.content_type.name}
 
-            templates = [
-                '%(app)s/%(model)s_publish_banner.html' % d,
-                'publisa/%(model)s_publish_banner.html' % d,
-                'publisa/item_publish_banner.html',]
-            t = template.loader.select_template(templates)
-            banner_context = template.Context({'object': p.content_object,
-                                               'publish': p})
-            banner_list.append(mark_safe(t.render(banner_context)))
+                templates = [
+                    '%(app)s/%(model)s_publish_banner.html' % d,
+                    'publisa/%(model)s_publish_banner.html' % d,
+                    'publisa/item_publish_banner.html',]
+                t = template.loader.select_template(templates)
+                banner_context = template.Context({'object': p.content_object,
+                                                   'publish': p})
+                banner_list.append(mark_safe(t.render(banner_context)))
         context[self.var_name] = banner_list
         return ''
 
