@@ -25,3 +25,7 @@ def tag_list(request):
         for t in tags: tag_list.add(t)
 
     print tag_list
+
+def tag_detail(request):
+    """ Returns all the published items with this tag """
+    pass
