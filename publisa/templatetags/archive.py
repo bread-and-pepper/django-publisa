@@ -46,7 +46,7 @@ class PopularTags(template.Node):
         self.var_name = var_name
 
     def render(self, context):
-        tag_list = TaggedItem.objects.annotate(count=Count('tag')).order_by('count')
+        tag_list = TaggedItem.objects.values('tag__name').annotate(count=Count('tag')).order_by('-count').distinct()
 
         context[self.var_name] = tag_list
         return ''
