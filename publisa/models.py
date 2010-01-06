@@ -85,6 +85,16 @@ class Publish(models.Model):
         """
         return self.content_object.get_absolute_url()
 
+    def get_rss_title(self):
+        if not hasattr(self.content_object, 'publish_rss_title'):
+            return self.content_object
+        return self.content_object.publish_rss_title
+
+    def get_rss_description(self):
+        if not hasattr(self.content_object, 'publish_rss_description'):
+            return self.content_object
+        return self.content_object.publish_rss_description
+
     def get_previous_published(self):
         """ Returns the previously published item or None if there's none. """
         prev_pub = self.get_previous_by_publish(approved=True)
