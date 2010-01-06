@@ -1,5 +1,6 @@
 from django import template
 from django.db import models
+from django.db.models import Count
 from django.utils.safestring import mark_safe
 
 Publish = models.get_model('publisa', 'publish')
@@ -29,6 +30,10 @@ def most_commented(parsen, token):
     if not model:
         raise template.TemplateSyntaxError, '%s could not be found.' % app_model
 
+    # Check if the model has comments
+    if not hasattr(model, 'comments'):
+        raise template.TemplateSyntaxError, 'Could not find comments for %s!' % app_model
+
     # Check if total is an integer
     try:
         total = int(total)
@@ -47,8 +52,8 @@ class MostCommented(template.Node):
         self.var = var
 
     def render(self, context):
-
-        context[self.var] = 'blaa'
+        object_list = self.model.objects.all().annotate(comment_count=Count('comments')).order_by('-comment_count')[:self.total]
+        context[self.var] = object_list
         return ''
 
 @register.tag
