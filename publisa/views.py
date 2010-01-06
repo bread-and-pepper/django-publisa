@@ -33,7 +33,7 @@ def tag_list(request):
 def tag_detail(request, slug):
     """ Returns all the published items with this tag """
     tag_name = slug.replace('-', ' ')
-    tag = get_object_or_404(Tag, name__iexact=slug)
+    tag = get_object_or_404(Tag, name__iexact=tag_name)
 
     extra_context = {'tag': tag}
     # Get distinct content types that are published
