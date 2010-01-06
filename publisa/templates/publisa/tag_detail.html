@@ -3,9 +3,22 @@
 {% block content_title %}Items tagged with {{ tag }}{% endblock %}
 
 {% block content %}
+
+{% if article_list %}
+<h2>Articles</h2>
 <ul>
-{% for object in object_list %}
-    <li><a href="{{ object.get_absolute_url }}">{{ object }}</a></li>
+{% for article in article_list %}
+    <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
 {% endfor %}
 </ul>
+{% endif %}
+
+{% if column_list %}
+<h2>Columns</h2>
+<ul>
+{% for column in column_list %}
+<li><a href="{{ column.get_absolute_url }}">{{ column.title }}</a> door <a href="{{ column.columnist.get_absolute_url }}">{{ column.columnist.user.get_full_name }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

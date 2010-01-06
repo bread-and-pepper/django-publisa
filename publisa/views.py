@@ -35,17 +35,21 @@ def tag_detail(request, slug):
     tag_name = slug.replace('-', ' ')
     tag = get_object_or_404(Tag, name__iexact=slug)
 
+    extra_context = {'tag': tag}
+    # Get distinct content types that are published
     content_types = Publish.objects.published().order_by('content_type').values('content_type').distinct()
 
-    taggeditem_list = []
     for c in content_types:
         c_type = ContentType.objects.get(pk=c['content_type'])
         model = c_type.model_class()
-        object_list = TaggedItem.objects.get_by_model(model, tag)
-        for object in object_list:
-            if object.publish.approved: taggeditem_list.append(object)
+        verbose_name = model._meta.verbose_name
+
+        # Get all published items for this content type
+        object_list = TaggedItem.objects.get_by_model(model.publish.all(), tag)
+
+        # Add those items to the extra context
+        extra_context['%(verbose)s_list' % {'verbose': verbose_name}] = object_list
 
     return direct_to_template(request,
                               'publisa/tag_detail.html',
-                              extra_context={'object_list': taggeditem_list,
-                                             'tag': tag})
+                              extra_context=extra_context)
