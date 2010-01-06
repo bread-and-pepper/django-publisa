@@ -7,6 +7,51 @@ Publish = models.get_model('publisa', 'publish')
 register = template.Library()
 
 @register.tag
+def most_commented(parsen, token):
+    """
+    Returns a list of most commented items
+
+    Usage::
+        {% most_commented <app>.<model> <total> as <variable> %}
+
+    Example::
+        {% most_commented artikelly.article 5 as popular_list %}
+
+    """
+    try:
+        tag_name, app_model, total, as_name, variable = token.split_contents()
+    except:
+        raise template.TemplateSyntaxError, '%s is used as "{% most_comment <app>.<model> <total> as <variable> %}' % token.contents.split()[0]
+
+    # Get the corresponding model
+    app_label, model = app_model.split('.')
+    model = models.get_model(app_label, model)
+    if not model:
+        raise template.TemplateSyntaxError, '%s could not be found.' % app_model
+
+    # Check if total is an integer
+    try:
+        total = int(total)
+    except ValueError:
+        raise template.TemplateSyntaxError, '"%s" should be an integer' % total
+
+    # Fourth argument should be 'as'
+    if not as_name == 'as': raise template.TemplateSyntaxError, 'Fourth argument should be "as" not "%s"!' % as_name
+
+    return MostCommented(model, total, variable)
+
+class MostCommented(template.Node):
+    def __init__(self, model, total, var):
+        self.model = model
+        self.total = total
+        self.var = var
+
+    def render(self, context):
+
+        context[self.var] = 'blaa'
+        return ''
+
+@register.tag
 def render_banners(parser, token):
     """
     Returns a list of rendered banners for published items
