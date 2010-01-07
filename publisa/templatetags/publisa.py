@@ -2,9 +2,39 @@ from django import template
 from django.db import models
 from django.db.models import Count
 from django.utils.safestring import mark_safe
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.comments.models import Comment
+from django.db import connection
+
+qn = connection.ops.quote_name
+
+def qf(table, field): # quote table and field
+    return '%s.%s' % ( qn(table), qn(field) )
+
+def comments_extra_count(queryset):
+    """
+    Returns a queryset for comments with ``comment_count`` attached.  Comes in
+    handy when wanting to sort models on the amount of comments.
+
+    """
+    commented_model = queryset.model
+    contenttype = ContentType.objects.get_for_model(commented_model)
+    commented_table = commented_model._meta.db_table
+    comment_table = Comment._meta.db_table
+
+    sql = '''SELECT COUNT(*) FROM %s
+             WHERE %s=%%s AND %s=%s
+          ''' % (
+        qn(comment_table),
+        qf(comment_table, 'content_type_id'),
+        qf(comment_table, 'object_pk'),
+        qf(commented_table, 'id'))
+
+    return queryset.extra(
+        select={'comment_count': sql },
+        select_params=(contenttype.pk,))
 
 Publish = models.get_model('publisa', 'publish')
-
 register = template.Library()
 
 @register.tag
@@ -52,8 +82,10 @@ class MostCommented(template.Node):
         self.var = var
 
     def render(self, context):
-        object_list = self.model.objects.all().annotate(comment_count=Count('comments')).order_by('-comment_count')[:self.total]
-        context[self.var] = object_list
+        object_list = self.model.objects.all()
+        commented_list = comments_extra_count(object_list).order_by('-comment_count')
+
+        context[self.var] = commented_list
         return ''
 
 @register.tag
