@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-13 15:00+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2010-01-13 15:03+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,39 +18,39 @@ msgstr ""
 
 #: models.py:14
 msgid "Draft"
-msgstr ""
+msgstr "Opzet"
 
 #: models.py:15
 msgid "Finished"
-msgstr ""
+msgstr "Voltooid"
 
 #: models.py:53
 msgid "publish"
-msgstr ""
+msgstr "publiceren"
 
 #: models.py:55
 msgid "The date of release."
-msgstr ""
+msgstr "Publicatie datum"
 
 #: models.py:56
 msgid "approve"
-msgstr ""
+msgstr "goedkeuren"
 
 #: models.py:59
 msgid "banner"
-msgstr ""
+msgstr "banner"
 
 #: models.py:61
 msgid "Should this item be published in the banner rotation?"
-msgstr ""
+msgstr "Moet dit item in de banner gepubliceerd worden?\""
 
 #: models.py:62
 msgid "banner image"
-msgstr ""
+msgstr "Banner afbeelding"
 
 #: models.py:65
 msgid "If left empty, the first photo in the article will be used."
-msgstr ""
+msgstr "Indien leeg wordt de eerste foto uit het artikel gebruikt."
 
 #: models.py:67
 msgid "content type"
@@ -59,33 +59,33 @@ msgstr ""
 #: models.py:134
 #, python-format
 msgid "%s ago.."
-msgstr ""
+msgstr "%s geleden.."
 
 #: models.py:136
 #, python-format
 msgid "%s left.."
-msgstr ""
+msgstr "%s te gaan"
 
 #: models.py:138
 msgid "Still needs approval.."
-msgstr ""
+msgstr "Heeft nog goedkeuring nodig.."
 
 #: models.py:139
 msgid "Publication"
-msgstr ""
+msgstr "Publicatie"
 
 #: models.py:148
 msgid "status"
-msgstr ""
+msgstr "status"
 
 #: models.py:151
 msgid "Draft will not be published."
-msgstr ""
+msgstr "Opzet wordt niet gepubliceerd"
 
 #: templates/admin/publisa/publish/change_form.html:5
 msgid "Preview"
-msgstr ""
+msgstr "Voorbeeld"
 
 #: templates/publisa/base.html:3
 msgid "Published items"
-msgstr ""
+msgstr "Gepubliceerde items"
