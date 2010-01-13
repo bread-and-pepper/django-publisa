@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-13 15:00+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:14
+msgid "Draft"
+msgstr ""
+
+#: models.py:15
+msgid "Finished"
+msgstr ""
+
+#: models.py:53
+msgid "publish"
+msgstr ""
+
+#: models.py:55
+msgid "The date of release."
+msgstr ""
+
+#: models.py:56
+msgid "approve"
+msgstr ""
+
+#: models.py:59
+msgid "banner"
+msgstr ""
+
+#: models.py:61
+msgid "Should this item be published in the banner rotation?"
+msgstr ""
+
+#: models.py:62
+msgid "banner image"
+msgstr ""
+
+#: models.py:65
+msgid "If left empty, the first photo in the article will be used."
+msgstr ""
+
+#: models.py:67
+msgid "content type"
+msgstr ""
+
+#: models.py:134
+#, python-format
+msgid "%s ago.."
+msgstr ""
+
+#: models.py:136
+#, python-format
+msgid "%s left.."
+msgstr ""
+
+#: models.py:138
+msgid "Still needs approval.."
+msgstr ""
+
+#: models.py:139
+msgid "Publication"
+msgstr ""
+
+#: models.py:148
+msgid "status"
+msgstr ""
+
+#: models.py:151
+msgid "Draft will not be published."
+msgstr ""
+
+#: templates/admin/publisa/publish/change_form.html:5
+msgid "Preview"
+msgstr ""
+
+#: templates/publisa/base.html:3
+msgid "Published items"
+msgstr ""
