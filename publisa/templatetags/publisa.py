@@ -185,7 +185,7 @@ class RenderTemplates(template.Node):
         else:
             if hasattr(obj, 'publish'):
                 d = {'app': obj.content_type.app_label,
-                     'model': obj.content_type.name,
+                     'model': obj.content_type.name.lower(),
                      'prefix': self.template_prefix}
 
                 templates = [
