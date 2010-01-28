@@ -23,7 +23,7 @@ def comments_extra_count(queryset):
     comment_table = Comment._meta.db_table
 
     sql = '''SELECT COUNT(*) FROM %s
-             WHERE %s=%%s AND %s::integer=%s
+             WHERE %s=%%s AND CAST(%s AS integer)=%s
           ''' % (
         qn(comment_table),
         qf(comment_table, 'content_type_id'),
@@ -126,7 +126,7 @@ class RenderBanners(template.Node):
             # Only add banners which have an image
             if p.get_banner_image():
                 d = {'app': p.content_type.app_label,
-                     'model': p.content_type.name}
+                     'model': p.content_type.name.lower()}
 
                 templates = [
                     '%(app)s/%(model)s_publish_banner.html' % d,
