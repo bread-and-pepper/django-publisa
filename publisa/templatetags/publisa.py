@@ -23,7 +23,7 @@ def comments_extra_count(queryset):
     comment_table = Comment._meta.db_table
 
     sql = '''SELECT COUNT(*) FROM %s
-             WHERE %s=%%s AND %s=%s
+             WHERE %s=%%s AND %s::integer=%s
           ''' % (
         qn(comment_table),
         qf(comment_table, 'content_type_id'),
