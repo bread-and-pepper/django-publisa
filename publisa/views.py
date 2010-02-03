@@ -46,7 +46,7 @@ def tag_detail(request, slug):
     for c in content_types:
         c_type = ContentType.objects.get(pk=c['content_type'])
         model = c_type.model_class()
-        verbose_name = model._meta.verbose_name
+        verbose_name = model._meta.verbose_name.lower()
 
         # Get all published items for this content type
         object_list = TaggedItem.objects.get_by_model(model.publish.all(), tag)
