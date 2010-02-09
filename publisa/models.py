@@ -70,8 +70,8 @@ class Publish(models.Model):
 
     class Meta:
         ordering = ['-publish']
-        verbose_name = 'published item'
-        verbose_name_plural = 'published items'
+        verbose_name = _('published item')
+        verbose_name_plural = _('published items')
         unique_together = ('content_type', 'object_id')
 
     def __unicode__(self):
