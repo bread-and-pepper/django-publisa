@@ -2,6 +2,7 @@ from django.views.generic import list_detail
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 from django.views.generic.simple import direct_to_template
+from django.views.decorators.vary import vary_on_cookie
 
 from publisa import settings as publisa_settings
 from publisa.models import Publish
@@ -10,6 +11,7 @@ from tagging.models import Tag, TaggedItem
 from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 10)
+@vary_on_cookie
 def index(request, page=0):
     """ Returns a list of articles """
     return list_detail.object_list(request,
@@ -19,6 +21,7 @@ def index(request, page=0):
                                    template_object_name='publish')
 
 @cache_page(60 * 60)
+@vary_on_cookie
 def tag_list(request):
     """ A view displaying the tags for all published items """
     content_types = Publish.objects.published().order_by('content_type').values('content_type').distinct()
@@ -34,6 +37,7 @@ def tag_list(request):
                               extra_context={'object_list': tag_list})
 
 @cache_page(60 * 60)
+@vary_on_cookie
 def tag_detail(request, slug):
     """ Returns all the published items with this tag """
     tag_name = slug.replace('-', ' ')
