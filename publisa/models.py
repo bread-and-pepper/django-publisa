@@ -7,6 +7,9 @@ from django.db.models.signals import post_save
 from django.db.models.query import QuerySet
 from django.contrib.contenttypes.generic import GenericForeignKey
 from django.db.models import F
+from django.core.cache import cache
+
+from publisa import settings as pub_settings
 
 import datetime
 
@@ -159,4 +162,14 @@ def post_save_published_at(sender, instance, created, **kwargs):
         instance.content_object.published_at = instance.publish
         instance.content_object.save()
 
+def post_save_cache_clear(sender, instance, created, **kwargs):
+    """
+    If needed clear some of the cache keys so that the frontpage is updated.
+    The keys can be set in the ``PUBLISA_CACHE_CLEAR_KEYS`` setting.
+
+    """
+    if instance.approved:
+        cache.delete_many(list(pub_settings.PUBLISA_CACHE_CLEAR_KEYS))
+
+post_save.connect(post_save_cache_clear, sender=Publish)
 post_save.connect(post_save_published_at, sender=Publish)
