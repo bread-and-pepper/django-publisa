@@ -10,8 +10,6 @@ from django.db.models import F
 from django.core.cache import cache
 from django.utils.hashcompat import md5_constructor
 from django.utils.http import urlquote
-from functional import compose
-
 
 from publisa import settings as pub_settings
 
