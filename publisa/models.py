@@ -169,6 +169,7 @@ def post_save_cache_clear(sender, instance, created, **kwargs):
 
     """
     if instance.approved:
+        print cache.get('template.cache.publisa.list.')
         cache.delete_many(list(pub_settings.PUBLISA_CACHE_CLEAR_KEYS))
 
 post_save.connect(post_save_cache_clear, sender=Publish)
