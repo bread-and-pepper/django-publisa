@@ -25,4 +25,7 @@ class PublishAdmin(admin.ModelAdmin):
             self.exclude = ('banner', 'banner_image')
         return super(PublishAdmin, self).get_form(request, obj=None, **kwargs)
 
+    def has_add_permission(self, request):
+        return False
+
 admin.site.register(Publish, PublishAdmin)
