@@ -8,6 +8,10 @@ from django.db.models.query import QuerySet
 from django.contrib.contenttypes.generic import GenericForeignKey
 from django.db.models import F
 from django.core.cache import cache
+from django.utils.hashcompat import md5_constructor
+from django.utils.http import urlquote
+from functional import compose
+
 
 from publisa import settings as pub_settings
 
@@ -168,9 +172,14 @@ def post_save_cache_clear(sender, instance, created, **kwargs):
     The keys can be set in the ``PUBLISA_CACHE_CLEAR_KEYS`` setting.
 
     """
-    if instance.approved:
-        print cache.get('template.cache.publisa.list.')
-        cache.delete_many(list(pub_settings.PUBLISA_CACHE_CLEAR_KEYS))
+    # clear normal cache
+    cache.delete_many(list(pub_settings.PUBLISA_CACHE_CLEAR_KEYS))
+
+    # clear template cache
+    for k,v in pub_settings.PUBLISA_CACHE_CLEAR_TEMPLATE_KEYS.items():
+        args = md5_constructor(u':'.join([urlquote(var) for var in v]))
+        cache_key = 'template.cache.%s.%s' % (k, args.hexdigest())
+        cache.delete(cache_key)
 
 post_save.connect(post_save_cache_clear, sender=Publish)
 post_save.connect(post_save_published_at, sender=Publish)

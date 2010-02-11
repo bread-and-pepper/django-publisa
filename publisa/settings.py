@@ -7,4 +7,6 @@ PUBLISA_PAGINATE_BY = getattr(settings, 'PUBLISA_PAGINATE_BY', 10)
 PUBLISA_AUTO_PUBLISH = getattr(settings, 'PUBLISA_AUTO_PUBLISH', False)
 
 # Which keys in the cache should be reset.
-PUBLISA_CACHE_CLEAR_KEYS = getattr(settings, 'PUBLISA_CACHE_CLEAR_KEYS', ())
+PUBLISA_CACHE_CLEAR_KEYS = getattr(settings, 'PUBLISA_CLEAR_CACHE_KEYS', ())
+PUBLISA_CACHE_CLEAR_TEMPLATE_KEYS = gettattr(settings, 'PUBLISA_CACHE_CLEAR_TEMPLATE_KEYS', {})
+
