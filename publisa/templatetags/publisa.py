@@ -83,7 +83,7 @@ class MostCommented(template.Node):
 
     def render(self, context):
         object_list = self.model.publish.all()
-        commented_list = comments_extra_count(object_list).order_by('-comment_count')[:self.total]
+        commented_list = comments_extra_count(object_list).exclude(comment_count=0).order_by('-comment_count')[:self.total]
 
         context[self.var] = commented_list
         return ''
