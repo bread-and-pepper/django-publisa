@@ -17,6 +17,7 @@ def post_save_handler(sender, instance, created, **kwargs):
     # Status is finished, and there is no publish item. So add...
     if instance.status == 2 and not p:
         Publish.objects.create(content_object=instance,
+                               publish=datetime.datetime.now(),
                                banner=instance.allow_banners,
                                approved=lisa_settings.PUBLISA_AUTO_PUBLISH)
 
