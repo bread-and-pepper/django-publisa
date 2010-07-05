@@ -1,0 +1,16 @@
+{% load i18n thumbnail %}
+<div style="width: 540px; border: 1px solid #d4d4d4; padding: 10px;">
+<h4>{{ object.title }}</h4>
+<h5>{% trans 'Written by' %}: {{ object.author.get_full_name }}</h5>
+{% if object.teaser_html %}
+<h5>{% trans 'Teaser' %}:</h5>
+{{ object.teaser_html|safe }}
+<hr />
+{% endif %}
+<h5>{% trans 'Body' %}:</h5>
+{{ object.body_html|safe }}
+{% if publish.get_banner_image %}
+<h5>{% trans 'Banner photo' %}:</h5>
+<img src="{% thumbnail publish.get_banner_image 520x360 autocrop %}" style="border: 1px solid #333;" />
+{% endif %}
+</div>

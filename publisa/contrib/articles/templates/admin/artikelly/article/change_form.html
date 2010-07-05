@@ -1,0 +1,16 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block extrahead %}{{ block.super }}
+
+<script src="/media/js/jquery.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.move_to_submit_row').insertBefore('.submit-row>input:first');
+    });
+</script>
+{% endblock extrahead %}
+
+{% block after_field_sets %}{{ block.super }}
+<input value="{% trans 'Save and publish' %}" class="move_to_submit_row default" name="_publish" type="submit"/>
+{% endblock after_field_sets %}

@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-09 15:44+0100\n"
+"PO-Revision-Date: 2010-02-09 15:54+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:25 models.py:41 models.py:140
+msgid "title"
+msgstr "titel"
+
+#: models.py:26 models.py:43
+msgid "slug"
+msgstr "slug"
+
+#: models.py:29
+msgid "category"
+msgstr "categorie"
+
+#: models.py:30
+msgid "categories"
+msgstr "categoriën"
+
+#: models.py:44
+msgid "Used to create the URL for this article."
+msgstr "Wordt gebruikt voor de link naar dit artikel"
+
+#: models.py:46
+msgid "Author"
+msgstr "Auteur"
+
+#: models.py:47
+msgid "Category"
+msgstr "Categorie"
+
+#: models.py:48
+msgid "teaser"
+msgstr "introductie"
+
+#: models.py:50
+msgid ""
+"If left blank, the entire post "
+"will                                           be shown on the frontpage."
+msgstr ""
+"Wanneer deze leeggelaten wordt, zal het volledige artikel op de voorpagina "
+"getoond worden."
+
+#: models.py:52
+msgid "body"
+msgstr "inhoud"
+
+#: models.py:53
+msgid "tags"
+msgstr "onderwerpen"
+
+#: models.py:53
+msgid "Add tags so the article can be categorised."
+msgstr "Ken het artikel onderwerpen toe zodat het gecategoriseerd kan worden"
+
+#: models.py:54
+msgid "allow comments"
+msgstr "Sta reacties toe"
+
+#: models.py:56
+msgid "created"
+msgstr "gemaakt"
+
+#: models.py:58
+msgid "modified"
+msgstr "veranderd"
+
+#: models.py:62
+msgid "teaser html"
+msgstr "introductie in HTML"
+
+#: models.py:63
+msgid "body html"
+msgstr "inhoud in HTML"
+
+#: models.py:66
+msgid "published at"
+msgstr "gepubliseerd op"
+
+#: models.py:72
+msgid "Article"
+msgstr "Artikelen"
+
+#: models.py:73 templates/artikelly/base.html:3
+msgid "Articles"
+msgstr "Artikelen"
+
+#: models.py:128
+msgid "Content type"
+msgstr "Inhoudstype"
+
+#: models.py:139 models.py:154
+msgid "photo"
+msgstr "foto"
+
+#: models.py:142
+msgid "This will be shown when people hover above the photo."
+msgstr "Dit wordt getoond wanneer mensen over de foto heen gaan."
+
+#: models.py:143
+msgid "date added"
+msgstr "datum toegevoegd"
+
+#: models.py:155
+msgid "photo's"
+msgstr "foto's"
+
+#: widgets.py:24
+msgid "Currently:"
+msgstr "Huidige:"
+
+#: widgets.py:24 widgets.py:27
+msgid "Change:"
+msgstr "Veranderen:"
+
+#: templates/admin/artikelly/article/change_form.html:15
+msgid "Save and publish"
+msgstr "Opslaan en publiceren"
+
+#: templates/admin/inlines/default_list.html:4
+#: templates/admin/inlines/default_list.html:6
+msgid "Add a new one"
+msgstr "Voeg een nieuwe toe"
+
+#: templates/admin/inlines/widget.html:21
+msgid "Insert inlines into your body by choosing an inline type"
+msgstr "Voeg een element toe aan de inhoud door een elementsoort te kiezen"
+
+#: templates/artikelly/article_publish_admin.html:4
+msgid "Written by"
+msgstr "Geschreven door"
+
+#: templates/artikelly/article_publish_admin.html:6
+msgid "Teaser"
+msgstr "Introductie"
+
+#: templates/artikelly/article_publish_admin.html:10
+msgid "Body"
+msgstr "Inhoud"
+
+#: templates/artikelly/article_publish_admin.html:13
+msgid "Banner photo"
+msgstr "Foto in de banner"

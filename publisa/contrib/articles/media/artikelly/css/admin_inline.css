@@ -1,0 +1,32 @@
+ul#photo-list {
+    border: 1px solid #d4d4d4;
+    overflow: auto;
+    padding: 10px;
+}
+
+ul#photo-list li {
+    float: left;
+    list-style: none;
+    text-align: center;
+    border: 1px solid #d4d4d4;
+    width: 110px;
+    margin-left: 5px;
+    padding: 5px;
+    height: 130px;
+    background-color: #efefef;
+    cursor: pointer; cursor: hand;
+}
+
+ul#photo-list li:hover {
+    border: 1px solid #333;
+    background-color: #d4d4d4;
+}
+
+ul#photo-list img {
+    border: 1px solid #333;
+}
+
+ul#photo-list .photo{
+    height: 100px;
+    padding-bottom: 5px;
+}

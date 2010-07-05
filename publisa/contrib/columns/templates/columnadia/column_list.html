@@ -1,0 +1,6 @@
+<h1>All columns</h2>
+<ul>
+{% for column in column_list %}
+    <li><a href="{{ column.get_absolute_url }}">{{ column.title }}</a></li>
+{% endfor %}
+</ul>

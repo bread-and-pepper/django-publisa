@@ -1,0 +1,13 @@
+{% load adminmedia i18n %}
+<label for="id_inline_type" class="required">{{ inline.title }}:</label>
+{% comment %}
+<a href="{{ admin_add }}" class="add-another" id="add_id_{{ object }}">{% trans 'Add a new one' %} <img src="{% admin_media_prefix %}img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
+{% endcomment %}
+<a href="{{ admin_add }}" class="add-another" id="add_id_{{ object }}" onclick="return showAddAnotherPopup(this);">{% trans 'Add a new one' %} <img src="{% admin_media_prefix %}img/admin/icon_addlink.gif" width="10" height="10" alt="Add Another"/></a>
+{% block inline_list %}
+<ul>
+{% for object in object_list %}
+    <li rel="{{ model_name }}-{{ object.id }}"><a href="#">{{ object }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

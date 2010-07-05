@@ -1,0 +1,13 @@
+{% load thumbnail %}
+
+<h1>{{ columnist.user.get_full_name }}</h1>
+<img src="{% thumbnail columnist.headshot 100x100 crop %}" />
+<h2>Biography</h2>
+{{ columnist.biography|safe }}
+
+<h2>Columns:</h2>
+<ul>
+{% for column in columnist.column.all %}
+    <li><a href="{{ column.get_absolute_url }}">{{ column.title }}</a></li>
+{% endfor %}
+</ul>

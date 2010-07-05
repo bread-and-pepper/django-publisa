@@ -1,0 +1,23 @@
+{% load i18n adminmedia %}
+
+<strong>Inline type:</strong>
+<select id="id_inline_content_type" style="margin-right:20px;">
+  {% for id, label in choices %}
+  <option value="{{ id }}">{{ label }}</option>
+  {% endfor %}
+</select>
+<strong>Class:</strong>
+<select id="id_inline_content_class" style="margin-right:20px;">
+  {% for id, label in classes %}
+  <option value="{{ id }}">{{ label }}</option>
+  {% endfor %}
+</select>
+<strong>Append to:</strong>
+<select id="id_inline_content_dest">
+  <option value="id_body">Body</option>
+  <option value="id_teaser">Teaser</option>
+</select>
+
+<p class="help">{% trans 'Insert inlines into your body by choosing an inline type' %}.</p>
+
+<div class="response" rel="{% url artikelly-admin-inline 0 %}"></div>

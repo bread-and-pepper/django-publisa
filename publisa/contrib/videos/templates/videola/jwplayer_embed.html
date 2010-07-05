@@ -1,0 +1,20 @@
+<div class="video fwplayer">
+    <object id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" name="player" width="{{ video.size.width }}" height="{{ video.size.height }}">
+        <param name="movie" value="{{ media_url }}videola/jwplayer/player-viral.swf" />
+        <param name="allowfullscreen" value="true" />
+        <param name="allowscriptaccess" value="always" />
+
+        <param name="flashvars" value="file={{ video.url }}&image={{ video.thumbnail.url }}" />
+        <embed
+        type="application/x-shockwave-flash"
+        id="player2"
+        name="player2"
+        src="{{ media_url }}videola/jwplayer/player-viral.swf" 
+        width={{ video.size.width }}
+        height={{ video.size.height }}
+        allowscriptaccess="always" 
+        allowfullscreen="true"
+        flashvars="file={{ video.url }}&image={{ video.thumbnail.url }}"
+        />
+    </object>
+</div>

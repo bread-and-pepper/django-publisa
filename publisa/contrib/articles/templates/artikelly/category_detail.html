@@ -1,0 +1,12 @@
+{% extends 'artikelly/base.html' %}
+
+{% block content_title %}<h1>Listing all items for {{ category }}</h1>{% endblock %}
+
+{% block content %}
+{{ category }}
+<ul>
+{% for a in article_list %}
+    <li><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

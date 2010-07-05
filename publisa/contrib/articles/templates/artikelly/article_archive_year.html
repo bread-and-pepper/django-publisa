@@ -1,0 +1,12 @@
+{% extends 'artikelly/base.html' %}
+{% block content_title %}
+Archive for year {{ year }}
+{% endblock %}
+
+{% block content %}
+<ul>
+{% for a in article_list %}
+    <li><a href="{{ a.get_absolute_url }}">{{ a.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

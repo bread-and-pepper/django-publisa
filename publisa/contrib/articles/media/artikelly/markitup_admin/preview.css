@@ -1,0 +1,20 @@
+/* preview style examples */
+body {
+	background-color:#EFEFEF;
+	font:70% Verdana, Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+img {
+    border: 1px solid #4d4d4d;
+}
+
+img.small-left {
+    float: left;
+    margin: 0 5px 5px 0;
+}
+
+img.small-right {
+    float: right;
+    margin: 0 0 5px 5px;
+}

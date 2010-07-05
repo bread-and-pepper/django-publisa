@@ -1,0 +1,10 @@
+{% extends 'admin/inlines/default_list.html' %}
+{% load thumbnail %}
+
+{% block inline_list %}
+<ul id="photo-list">
+{% for photo in object_list %}
+    <li><div class="photo"><img src="{% thumbnail photo.photo 100x100 %}" rel="{{ app_label }}.{{ model_name }}-{{ photo.id }}" /></div>{{ photo.title }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

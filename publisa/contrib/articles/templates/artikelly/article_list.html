@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load paginator %}
+{% block content_title %}
+All articles.
+{% endblock %}
+
+{% block content %}
+<ul>
+{% for a in article_list %}
+    <a href="{{ a.get_absolute_url }}">{{ a.title }}</a></li>
+{% endfor %}
+</ul>
+{% if is_paginated %}{% load paginator %}{% paginator 3 'artikelly/paginator.html' %}{% endif %}
+{% endblock %}

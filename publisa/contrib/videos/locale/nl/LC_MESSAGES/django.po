@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-09 15:48+0100\n"
+"PO-Revision-Date: 2010-02-09 15:50+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:12
+msgid "low"
+msgstr "laag"
+
+#: models.py:13
+msgid "medium"
+msgstr "gemiddeld"
+
+#: models.py:14
+msgid "maximum"
+msgstr "maximaal"
+
+#: models.py:35
+msgid "width"
+msgstr "breedte"
+
+#: models.py:36
+msgid "height"
+msgstr "hoogte"
+
+#: models.py:45
+msgid "image"
+msgstr "afbeelding"
+
+#: models.py:52
+msgid "title"
+msgstr "titel"
+
+#: models.py:53
+msgid "slug"
+msgstr "slug"
+
+#: models.py:54
+msgid "quality"
+msgstr "kwaliteit"
+
+#: models.py:56
+msgid "video"
+msgstr "video"
+
+#: models.py:59
+msgid "thumbnail"
+msgstr "thumbnail"
+
+#: models.py:62
+msgid "If left blank this will be auto-generated."
+msgstr "Indien deze leeg word gelaten, zal er een gegenereerd worden."

@@ -1,0 +1,9 @@
+{% load thumbnail %}
+
+{% ifequal class 'centerpiece' %}
+{% thumbnail object.photo 520x1000 autocrop as photo %}
+{% else %}
+{% thumbnail object.photo 100x1000 autocrop as photo %}
+{% endifequal %}
+
+<img src="{{ photo }}" alt="{{ object.title }}" class="{{ class }}" title="{{ object.title }}" />
